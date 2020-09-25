@@ -1,0 +1,5 @@
+# Copyright 2020 Ubuntu
+# See LICENSE file for licensing details.
+#
+synchronize:
+  description: Synchronize the images.

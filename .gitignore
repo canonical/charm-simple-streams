@@ -1,0 +1,5 @@
+.jujuignore
+.vscode/
+build/
+env/
+simple-streams.charm

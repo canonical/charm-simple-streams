@@ -1,0 +1,11 @@
+# Copyright 2020 Ubuntu
+# See LICENSE file for licensing details.
+name: simple-streams
+description: |
+  Simple Streams describe streams of like items in a structural fashion.
+  A client provides a way to sync or act on changes in a remote stream.
+summary: |
+  Simple Streams repository
+series: [bionic]
+
+

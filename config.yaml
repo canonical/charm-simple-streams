@@ -1,0 +1,42 @@
+# Copyright 2020 Ubuntu
+# See LICENSE file for licensing details.
+#
+options:
+  verbose:
+    default: False
+    description: Verbose output.
+    type: boolean
+  keyring-file:
+    default: /usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+    description: GPG keysring of the upstream repository.
+    type: string
+  image-source:
+    default: https://images.maas.io/ephemeral-v3/daily/
+    description: Upstream image source.
+    type: string
+  path:
+    default: 
+    description: Sync from index or products file in mirror.
+    type: string
+  log-file:
+    default: 
+    description: Simple stream log file.
+    type: string
+  image-dir:
+    default: /var/www/html/maas/images/ephemeral-v3/daily
+    description: The location where the synced images will be stored.
+    type: string
+  image-selectors:
+    default: |-
+      arch=amd64 release~(bionic)
+      os~(grub*|pxelinux)
+    description: The list of image selector, one per line.
+    type: string
+  image-max:
+    default: 1
+    description: The maximum number of image releases to sync.
+    type: int
+  cron-schedule:
+    default: None
+    description: The cron tab time entry for automatic synchronisation.
+    type: string
