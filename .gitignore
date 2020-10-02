@@ -2,4 +2,5 @@
 .vscode/
 build/
 env/
+venv/
 simple-streams.charm
