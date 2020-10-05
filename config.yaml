@@ -6,6 +6,14 @@ options:
     default: False
     description: Verbose output.
     type: boolean
+  copy-on-snapshot:
+    default: False
+    description: Copy all data on snapshot (otherwise only metadata is copied).
+    type: boolean
+  keep:
+    default: True
+    description: Keep items in target up to MAX items even after they have fallen out of the source.
+    type: boolean
   keyring-file:
     default: /usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
     description: GPG keysring of the upstream repository.

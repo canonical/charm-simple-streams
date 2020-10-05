@@ -3,3 +3,21 @@
 #
 synchronize:
   description: Synchronize the images.
+create-snapshot:
+  description: Create timestemped snapshot of current image metadata.
+list-snapshots:
+  description: List snapshots.
+delete-snapshot:
+  description: Delete snapshot. Note that it deletes only the metadata.
+  params:
+    name:
+      description: "Name of the snapshot to delete."
+      type: string
+      default: ""
+publish-snapshot:
+  description: Publish snapshot.
+  params:
+    name:
+      description: "Name of the snapshot to publish."
+      type: string
+      default: ""

@@ -7,5 +7,7 @@ description: |
 summary: |
   Simple Streams repository
 series: [bionic]
-
+provides:
+  publish:
+    interface: "web-publish"
 
