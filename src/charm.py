@@ -3,6 +3,7 @@
 # See LICENSE file for licensing details.
 
 import logging
+import copy
 
 from ops.charm import CharmBase
 from ops.main import main
@@ -72,9 +73,16 @@ class SimpleStreamsCharm(CharmBase):
         selectors = self._stored.config['image-selectors']
         for selector in selectors.splitlines():
             logger.info("Syncing {}".format(selector))
+            env = copy.deepcopy(os.environ)
+            if 'JUJU_CHARM_HTTP_PROXY' in env:
+                env['HTTP_PROXY'] = env['JUJU_CHARM_HTTP_PROXY']
+            if 'JUJU_CHARM_HTTPS_PROXY' in env:
+                env['HTTPS_PROXY'] = env['JUJU_CHARM_HTTPS_PROXY']
             try:
                 subprocess.check_output(self._sync_selector_cmd(selector),
+                                        env=env,
                                         stderr=subprocess.STDOUT)
+                logger.info("Syncing complete")
             except subprocess.CalledProcessError as e:
                 logger.info("Error {}".format(e.output))
                 event.fail(e.output)

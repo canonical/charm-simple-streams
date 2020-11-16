@@ -6,13 +6,14 @@ from unittest.mock import (
     call,
     Mock,
     patch,
-    mock_open
+    mock_open,
 )
 from ops.testing import Harness
 from charm import SimpleStreamsCharm
 
 from uuid import uuid4
 import random
+import os
 
 
 class TestCharm(unittest.TestCase):
@@ -92,6 +93,7 @@ class TestCharm(unittest.TestCase):
         self.assertFalse(os_makedirs.called)
         self.assertFalse(os_symlink.called)
 
+    @patch.dict(os.environ, {"foo": "bar"}, clear=True)
     @patch('subprocess.check_output')
     def test_synchronize_action_defaults(self, mock_subproc):
         process_mock = Mock()
@@ -116,8 +118,10 @@ class TestCharm(unittest.TestCase):
                                                minimal_config['image-source'],
                                                "{}/latest".format(minimal_config['image-dir']),
                                                minimal_config['image-selectors']],
+                                              env={'foo': 'bar'},
                                               stderr=-2)
 
+    @patch.dict(os.environ, {"JUJU_CHARM_HTTP_PROXY": "proxy"}, clear=True)
     @patch('subprocess.check_output')
     def test_synchronize_action_all_params(self, mock_subproc):
         process_mock = Mock()
@@ -140,6 +144,8 @@ class TestCharm(unittest.TestCase):
                                                default_config['image-source'],
                                                "{}/latest".format(default_config['image-dir']),
                                                default_config['image-selectors']],
+                                              env={'JUJU_CHARM_HTTP_PROXY': 'proxy',
+                                                   'HTTP_PROXY': 'proxy'},
                                               stderr=-2)
 
     @patch('os.symlink')
