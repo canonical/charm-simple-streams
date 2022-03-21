@@ -6,7 +6,7 @@ description: |
   A client provides a way to sync or act on changes in a remote stream.
 summary: |
   Simple Streams repository
-series: [bionic]
+series: [bionic,focal]
 provides:
   publish:
     interface: "web-publish"
