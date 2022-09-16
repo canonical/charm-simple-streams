@@ -1,0 +1,6 @@
+applications:
+  simple-stream:
+    charm: {{ simple_stream_charm }}
+    series: {{ series }}
+    num_units: 1
+
