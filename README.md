@@ -9,20 +9,28 @@ A client provides a way to sync or act on changes in a remote stream.
 
 The charm can be deployed using juju:
 ```
-juju deploy cs:simple-streams
+juju deploy ch:simple-streams
 ```
 
 ## Developing
 
-Create and activate a virtualenv,
-and install the development requirements,
+Create and activate a virtualenv with the development requirements:
 
-    virtualenv -p python3 venv
-    source venv/bin/activate
-    pip install -r requirements-dev.txt
+    make dev-environment
+    source .venv/bin/activate
+
 
 ## Testing
 
-Just run `run_tests`:
+You can use either tox or Makefile.
 
-    ./run_tests
+    tox
+    # or
+    make test
+
+It is possible to run only some tests using the following commands:
+
+    tox -e lint  # make lint
+    tox -e unit  # make unittests
+    tox -e func  # make functional
+
