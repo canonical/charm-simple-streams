@@ -18,6 +18,19 @@ from ops.model import ActiveStatus, BlockedStatus
 logger = logging.getLogger(__name__)
 
 
+def _get_env():
+    """Get environment variables for subprocess."""
+    env = copy.deepcopy(os.environ)
+    if "JUJU_CHARM_HTTP_PROXY" in env:
+        env["HTTP_PROXY"] = env["JUJU_CHARM_HTTP_PROXY"]
+    if "JUJU_CHARM_HTTPS_PROXY" in env:
+        env["HTTPS_PROXY"] = env["JUJU_CHARM_HTTPS_PROXY"]
+    if "JUJU_CHARM_NO_PROXY" in env:
+        env["NO_PROXY"] = env["JUJU_CHARM_NO_PROXY"]
+
+    return env
+
+
 class SimpleStreamsCharm(CharmBase):
     _stored = StoredState()
 
@@ -84,11 +97,7 @@ class SimpleStreamsCharm(CharmBase):
         selectors = self._stored.config["image-selectors"]
         for selector in selectors.splitlines():
             logger.info("Syncing {}".format(selector))
-            env = copy.deepcopy(os.environ)
-            if "JUJU_CHARM_HTTP_PROXY" in env:
-                env["HTTP_PROXY"] = env["JUJU_CHARM_HTTP_PROXY"]
-            if "JUJU_CHARM_HTTPS_PROXY" in env:
-                env["HTTPS_PROXY"] = env["JUJU_CHARM_HTTPS_PROXY"]
+            env = _get_env()
             try:
                 subprocess.check_output(
                     self._sync_selector_cmd(selector), env=env, stderr=subprocess.STDOUT
