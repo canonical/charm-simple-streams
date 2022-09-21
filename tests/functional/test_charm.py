@@ -20,4 +20,3 @@ async def test_build_and_deploy(ops_test, series):
         )
     )
     await ops_test.model.wait_for_idle(status="unknown")
-
