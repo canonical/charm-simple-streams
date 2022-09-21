@@ -48,6 +48,5 @@ jobs:
         run: tox -e func -- --series bionic
       - name: Run tests on Focal series
         run: tox -e func -- --series focal
-      - name: Run tests on Jammy seires
+      - name: Run tests on Jammy series
         run: tox -e func -- --series jammy
-

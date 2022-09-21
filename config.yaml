@@ -23,11 +23,11 @@ options:
     description: Upstream image source.
     type: string
   path:
-    default: 
+    default:
     description: Sync from index or products file in mirror.
     type: string
   log-file:
-    default: 
+    default:
     description: Simple stream log file.
     type: string
   image-dir:
