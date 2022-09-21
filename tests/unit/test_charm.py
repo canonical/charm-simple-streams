@@ -9,7 +9,25 @@ from uuid import uuid4
 
 from ops.testing import Harness
 
-from charm import SimpleStreamsCharm
+from charm import SimpleStreamsCharm, _get_env
+
+
+@patch.dict(
+    os.environ,
+    {
+        "JUJU_CHARM_HTTP_PROXY": "http_proxy",
+        "JUJU_CHARM_HTTPS_PROXY": "https_proxy",
+        "JUJU_CHARM_NO_PROXY": "no_proxy",
+        "TEST": "test",
+    },
+    clear=True,
+)
+def test_get_env():
+    env = _get_env()
+    assert env.get("JUJU_CHARM_HTTP_PROXY") == "http_proxy"
+    assert env.get("JUJU_CHARM_HTTPS_PROXY") == "https_proxy"
+    assert env.get("JUJU_CHARM_NO_PROXY") == "no_proxy"
+    assert env.get("TEST") == "test"
 
 
 class TestCharm(unittest.TestCase):
