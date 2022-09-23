@@ -9,4 +9,3 @@ summary: |
 provides:
   publish:
     interface: "web-publish"
-

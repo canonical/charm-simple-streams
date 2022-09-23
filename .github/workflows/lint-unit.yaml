@@ -27,4 +27,3 @@ jobs:
       run: tox -e lint
     - name: Run unit tests
       run: tox -e unit
-

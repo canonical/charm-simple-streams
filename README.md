@@ -33,4 +33,3 @@ It is possible to run only some tests using the following commands:
     tox -e lint  # make lint
     tox -e unit  # make unittests
     tox -e func  # make functional
-

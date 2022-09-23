@@ -1,4 +1,3 @@
-import asyncio
 import logging
 
 import pytest
@@ -14,10 +13,9 @@ async def test_build_and_deploy(ops_test, series):
 
     await ops_test.model.deploy(
         ops_test.render_bundle(
-            "tests/functional/bundle.yaml",
+            "tests/functional/bundle.yaml.j2",
             simple_stream_charm=simple_stream_charm,
             series=series,
         )
     )
     await ops_test.model.wait_for_idle(status="unknown")
-
