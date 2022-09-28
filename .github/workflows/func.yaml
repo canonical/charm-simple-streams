@@ -27,6 +27,6 @@ jobs:
         uses: charmed-kubernetes/actions-operator@main
         with:
           provider: lxd
-      - name: Run tests on Bionic ${{ matrix.series }}
+      - name: Run tests on ${{ matrix.series }} series
         run: tox -e func -- --series ${{ matrix.series }}
 
