@@ -27,12 +27,9 @@ jobs:
       fail-fast: false
       matrix:
         series: ["focal", "jammy"]
-        include:
-          - juju-channel: '3.1/stable'
-            command: 'make functional'
     with:
-      command: FUNC_ARGS="--series ${{ matrix.series }}" ${{ matrix.command }}
-      juju-channel: ${{ matrix.juju-channel }}
+      command: FUNC_ARGS="--series ${{ matrix.series }}" make functional
+      juju-channel: '3.1/stable'
       nested-containers: true
       python-version: '3.10'
       timeout-minutes: 120
