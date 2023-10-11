@@ -36,7 +36,7 @@ options:
     type: string
   image-selectors:
     default: |-
-      arch=amd64 release~(bionic)
+      arch=amd64 release~(jammy)
       os~(grub*|pxelinux)
     description: The list of image selector, one per line.
     type: string
