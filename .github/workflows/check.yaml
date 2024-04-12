@@ -22,16 +22,29 @@ jobs:
       tox-version: '<4'
 
   func:
-    uses: canonical/bootstack-actions/.github/workflows/func.yaml@v2
+    name: Functional tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
     needs: lint-unit
     strategy:
       fail-fast: false
       matrix:
-        series: ["focal", "jammy"]
-    with:
-      command: FUNC_ARGS="--series ${{ matrix.series }}" make functional
-      juju-channel: '3.1/stable'
-      nested-containers: true
-      python-version: '3.10'
-      timeout-minutes: 120
-      tox-version: '<4'
+        series: ['focal', 'jammy']
+        juju-channel: ['3.4/stable']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Setup Juju ${{ matrix.juju-channel }} LXD environment
+        uses: charmed-kubernetes/actions-operator@main
+        with:
+          provider: lxd
+          juju-channel: ${{ matrix.juju-channel }}
+      - name: Show juju information
+        run: |
+          juju version
+          juju controllers | grep Version -A 1 | awk '{print $9}'
+      - name: Run functional test
+        run: FUNC_ARGS='--series ${{ matrix.series }}' make functional
