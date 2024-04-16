@@ -27,6 +27,10 @@ jobs:
 
   func:
     uses: canonical/bootstack-actions/.github/workflows/func.yaml@v2
+    needs: lint-unit
+    strategy:
+      fail-fast: false
+      matrix:
         series: ["focal", "jammy"]
     with:
       command: FUNC_ARGS="--series ${{ matrix.series }}" make functional
