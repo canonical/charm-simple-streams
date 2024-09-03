@@ -138,7 +138,11 @@ class TestCharm(unittest.TestCase):
                 "{}/latest".format(minimal_config["image-dir"]),
                 minimal_config["image-selectors"],
             ],
-            env={"foo": "bar"},
+            env={
+                "foo": "bar",
+                # Harness inserts this into os.environ if JUJU_VERSION doesn't exist
+                "JUJU_VERSION": "0.0.0",
+            },
             stderr=-2,
         )
 
@@ -168,7 +172,12 @@ class TestCharm(unittest.TestCase):
                 "{}/latest".format(default_config["image-dir"]),
                 default_config["image-selectors"],
             ],
-            env={"JUJU_CHARM_HTTP_PROXY": "proxy", "HTTP_PROXY": "proxy"},
+            env={
+                "JUJU_CHARM_HTTP_PROXY": "proxy",
+                "HTTP_PROXY": "proxy",
+                # Harness inserts this into os.environ if JUJU_VERSION doesn't exist
+                "JUJU_VERSION": "0.0.0",
+            },
             stderr=-2,
         )
 
