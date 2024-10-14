@@ -6,6 +6,7 @@ description: |
   A client provides a way to sync or act on changes in a remote stream.
 summary: |
   Simple Streams repository
+docs: https://discourse.charmhub.io/t/bootstack-charmers-simple-streams-docs-index/15803
 provides:
   publish:
     interface: "web-publish"
