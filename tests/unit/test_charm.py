@@ -77,9 +77,7 @@ class TestCharm(unittest.TestCase):
     @patch("os.makedirs")
     @patch("os.path.isdir")
     @patch("builtins.open", new_callable=mock_open)
-    def test_cron_schedule_set(
-        self, mock_open_call, os_path_isdir, os_makedirs, os_symlink
-    ):
+    def test_cron_schedule_set(self, mock_open_call, os_path_isdir, os_makedirs, os_symlink):
         harness = Harness(SimpleStreamsCharm)
         self.addCleanup(harness.cleanup)
         harness.begin()
@@ -176,9 +174,7 @@ class TestCharm(unittest.TestCase):
     @patch("os.makedirs")
     @patch("os.path.isdir")
     @patch("builtins.open", new_callable=mock_open)
-    def test_publish_relation_joined(
-        self, mock_open_call, os_path_isdir, os_makedirs, os_symlink
-    ):
+    def test_publish_relation_joined(self, mock_open_call, os_path_isdir, os_makedirs, os_symlink):
         harness = Harness(SimpleStreamsCharm)
         harness.begin()
         default_config = self.default_config()

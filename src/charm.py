@@ -40,21 +40,11 @@ class SimpleStreamsCharm(CharmBase):
         self.framework.observe(self.on.install, self._on_install)
         self.framework.observe(self.on.update_status, self._on_update_status)
         self.framework.observe(self.on.synchronize_action, self._on_synchronize_action)
-        self.framework.observe(
-            self.on.create_snapshot_action, self._on_create_snapshot_action
-        )
-        self.framework.observe(
-            self.on.publish_snapshot_action, self._on_publish_snapshot_action
-        )
-        self.framework.observe(
-            self.on.list_snapshots_action, self._on_list_snapshots_action
-        )
-        self.framework.observe(
-            self.on.delete_snapshot_action, self._on_delete_snapshot_action
-        )
-        self.framework.observe(
-            self.on.publish_relation_joined, self._on_publish_relation_joined
-        )
+        self.framework.observe(self.on.create_snapshot_action, self._on_create_snapshot_action)
+        self.framework.observe(self.on.publish_snapshot_action, self._on_publish_snapshot_action)
+        self.framework.observe(self.on.list_snapshots_action, self._on_list_snapshots_action)
+        self.framework.observe(self.on.delete_snapshot_action, self._on_delete_snapshot_action)
+        self.framework.observe(self.on.publish_relation_joined, self._on_publish_relation_joined)
         self._stored.set_default(config={})
 
     def _on_publish_relation_joined(self, event):
@@ -127,9 +117,7 @@ class SimpleStreamsCharm(CharmBase):
                         "{}/{}".format(download_root, product),
                         "{}/{}".format(snapshot_root, product),
                     )
-        shutil.copytree(
-            "{}/.data".format(download_root), "{}/.data".format(snapshot_root)
-        )
+        shutil.copytree("{}/.data".format(download_root), "{}/.data".format(snapshot_root))
 
     def _on_delete_snapshot_action(self, event):
         snapshot = event.params["name"]
@@ -138,9 +126,7 @@ class SimpleStreamsCharm(CharmBase):
 
     def _on_list_snapshots_action(self, event):
         snapshots = []
-        for directory in next(os.walk("{}/".format(self._stored.config["image-dir"])))[
-            1
-        ]:
+        for directory in next(os.walk("{}/".format(self._stored.config["image-dir"])))[1]:
             if directory.startswith("snapshot-"):
                 snapshots.append(directory)
         logger.info("List snapshots {}".format(snapshots))
