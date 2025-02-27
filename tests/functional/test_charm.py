@@ -1,4 +1,5 @@
 import logging
+import os
 
 import pytest
 
@@ -9,7 +10,7 @@ log = logging.getLogger(__name__)
 @pytest.mark.skip_if_deployed
 async def test_build_and_deploy(ops_test, series):
     """Build simple-stream charm and deploy it in bundle."""
-    simple_stream_charm = await ops_test.build_charm(".")
+    simple_stream_charm = os.environ.get(f"CHARM_PATH_{series.upper()}")
 
     await ops_test.model.deploy(
         ops_test.render_bundle(
