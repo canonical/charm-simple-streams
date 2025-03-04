@@ -33,7 +33,7 @@ jobs:
           echo "${{ env.CHARM_NAMES }}"
 
       - name: Upload the tested charms to charmhub
-        uses: canonical/charming-actions/upload-charm@2.6.2
+        uses: canonical/charming-actions/upload-charm@2.7.0
         with:
           credentials: "${{ secrets.CHARMHUB_TOKEN }}"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
