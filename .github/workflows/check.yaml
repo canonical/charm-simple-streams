@@ -278,7 +278,7 @@ jobs:
         uses: tiobe/tics-github-action@v3
         with:
           mode: qserver
-          project: charm-duplicity
+          project: charm-simple-streams
           viewerUrl: https://canonical.tiobe.com/tiobeweb/TICS/api/cfg?name=default
           branchdir: ${{ github.workspace }}
           ticsAuthToken: ${{ secrets.TICSAUTHTOKEN }}
